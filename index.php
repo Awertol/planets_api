@@ -1,16 +1,9 @@
 <?php
 header('Content-Type: text/plain; charset=utf-8');
 
-// 1. Získání cesty z URL (univerzální způsob pro DigitalOcean)
-$requestUri = $_SERVER['REQUEST_URI']; 
-
-// Rozsekáme URL podle lomítek a vezmeme poslední část
-$parts = explode('/', rtrim($requestUri, '/'));
-$lastPart = end($parts);
-
-// Pokud je poslední část číslo, použijeme ho, jinak dáme 1
-$n = is_numeric($lastPart) ? (int)$lastPart : 1;
-$n = max(1, min(50, $n));
+// Místo složitých cest prostě koukneme na parametr "n" v adrese
+$n = isset($_GET['n']) && is_numeric($_GET['n']) ? (int)$_GET['n'] : 1;
+$n = max(1, min(30, $n));
 
 // 2. Zásoba pro generování (Prefixy, čísla a přípony)
 $prefixes = ["Kepler", "Gliese", "HD", "TOI", "WASP", "OGLE", "K2", "Gamma", "Gliese", "HATS", "PDS", "Gaia", "Proxima", "Trappist", "Wolf", "LHS"];
