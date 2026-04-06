@@ -2,7 +2,7 @@
 header('Content-Type: text/plain; charset=utf-8');
 
 // Místo složitých cest prostě koukneme na parametr "n" v adrese
-$n = isset($_GET['n']) && is_numeric($_GET['n']) ? (int)$_GET['n'] : 1;
+$n = isset($_GET['pocet']) && is_numeric($_GET['pocet']) ? (int)$_GET['pocet'] : 1;
 $n = max(1, min(30, $n));
 
 // 2. Zásoba pro generování (Prefixy, čísla a přípony)
