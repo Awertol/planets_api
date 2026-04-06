@@ -1,10 +1,16 @@
 <?php
 header('Content-Type: text/plain; charset=utf-8');
 
-// 1. Získání počtu z URL
-$path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : '';
-$n = is_numeric($path) ? (int)$path : 1;
-$n = max(1, min(50, $n)); // Ošetření limitu 1-50
+// 1. Získání cesty z URL (univerzální způsob pro DigitalOcean)
+$requestUri = $_SERVER['REQUEST_URI']; 
+
+// Rozsekáme URL podle lomítek a vezmeme poslední část
+$parts = explode('/', rtrim($requestUri, '/'));
+$lastPart = end($parts);
+
+// Pokud je poslední část číslo, použijeme ho, jinak dáme 1
+$n = is_numeric($lastPart) ? (int)$lastPart : 1;
+$n = max(1, min(50, $n));
 
 // 2. Zásoba pro generování (Prefixy, čísla a přípony)
 $prefixes = ["Kepler", "Gliese", "HD", "TOI", "WASP", "OGLE", "K2", "Gamma", "Gliese", "HATS", "PDS", "Gaia", "Proxima", "Trappist", "Wolf", "LHS"];
